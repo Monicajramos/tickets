@@ -1,0 +1,29 @@
+<h1>{{ ticket.tituloT }}</h1>
+
+{% if error_message %}
+    <p>
+        <strong>{{ error_message }}</strong>
+    </p>-->
+{% else %}
+
+    <div>
+        <h3>Datos:</h3>
+        <p> Categoría: {{ ticket.categoriaT }} </p>
+        <p> Autor: {{ ticket.autorT }} </p>
+        <p> Fecha de pub: {{ ticket.fechaT }} </p>
+        <p> Responsable: {{ ticket.responsableT}}  </p>
+    </div>
+    <div>
+        <h3>Descripcion:</h3>
+        <p> {{ ticket.descripcionT }} </p>
+    </div>
+     <div>
+        <h3>Comentarios:</h3>
+          {% for comentario in ticket.comentario_set.all %}
+            <li>
+                 <p> <strong>{{ comentario.autorC }} :</strong> {{ comentario.descripcionC }} </p>
+            </li>
+          {% endfor %}
+    </div>
+
+{% endif%}
