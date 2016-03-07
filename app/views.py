@@ -41,7 +41,7 @@ def addTicket(request):
         form = Formulario1()
     return render(request, 'app/formularioT.html', {'form': form})
 
-def addComment(request):
+def addComment(request,pk):
     if request.method == "POST":
         form = Formulario2(request.POST)
         if form.is_valid():
@@ -49,4 +49,4 @@ def addComment(request):
             return redirect('app:index')
     else:
         form = Formulario2()
-    return render(request, 'app/formularioT.html', {'form': form})
+    return render(request, 'app/formularioC.html', {'form': form})
