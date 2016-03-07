@@ -10,7 +10,7 @@ class Categoria(models.Model):
     categoria=models.CharField(max_length=100)
     def __str__(self):
         return self.categoria
-
+pp
 
 class Ticket(models.Model):
     categoriaT = models.ForeignKey(Categoria)  #relacion 1Ticket-1Categoria
