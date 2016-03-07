@@ -1,0 +1,51 @@
+<h1>{{ ticket.tituloT }}</h1>
+
+{% if error_message %}
+    <p>
+        <strong>{{ error_message }}</strong>
+    </p>-->
+{% else %}
+
+    <div>
+        <h3>Datos:</h3>
+        <p> Categoría: {{ ticket.categoriaT }} </p>
+        <p> Autor: {{ ticket.autorT }} </p>
+        <p> Fecha de pub: {{ ticket.fechaT }} </p>
+        <p> Responsable: {{ ticket.responsableT}}  </p>
+    </div>
+    <div>
+        <h3>Descripcion:</h3>
+        <p> {{ ticket.descripcionT }} </p>
+    </div>
+    <div>
+        <h3>Comentarios: ( {{ ticket.comentario_set.count }} )</h3>
+          {% for comentario in ticket.comentario_set.all %}
+            <li>
+                 <p> <strong>{{ comentario.autorC }} :</strong> {{ comentario.descripcionC }} </p>
+            </li>
+          {% endfor %}
+    </div>
+
+
+    <div>
+
+        <form method="post">  <!--aniadirT tiene def en views.py-->
+            {% csrf_token %} <!--Para evitar falsificación de petición en sitios cruzados)-->
+
+            <p>
+                <label>Comentario:</label>{{ form.descripcionC }} <br/>
+            </p>
+
+            <!--PARA DECIRLE AL FORMULARIO QUE EL AUTOR ES EL USUARIO "LOGGEADO" , HIDDEN PARA Q ESTÉ OCULTO-->
+            <input type="hidden" name="{{ form.ticket.html_name }}" value="{{ request.ticket.id  }}" />
+            <input type="hidden" name="{{ form.autorT.html_name }}" value="{{ request.user.id }}"/>
+
+            <input type="submit" value="Add" /> <!--value solo es el nombre del boton-->
+        </form>
+
+     </div>
+
+
+
+
+{% endif%}

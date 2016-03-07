@@ -18,12 +18,16 @@
         <p> {{ ticket.descripcionT }} </p>
     </div>
      <div>
-        <h3>Comentarios:</h3>
+        <h3>Comentarios:( {{ ticket.comentario_set.count }} )</h3>
           {% for comentario in ticket.comentario_set.all %}
             <li>
                  <p> <strong>{{ comentario.autorC }} :</strong> {{ comentario.descripcionC }} </p>
             </li>
           {% endfor %}
+        <li>
+             <a href="{% url 'app:formularioC' ticket.id %}">Add Comentario </a>
+        </li>
+
     </div>
 
 {% endif%}

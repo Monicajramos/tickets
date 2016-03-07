@@ -1,18 +1,26 @@
 
+
 {% if latest_ticket_list %}
 
-    <ul>
-    {% for ticket in latest_ticket_list %}
 
-        <li>
-             <a href="{% url 'app:ticket' ticket.id %}">{{ ticket.tituloT}}
-             </a>
-        </li>
+    <div>
+            <ul>
+            {% for ticket in latest_ticket_list %}
+
+                <li>
+                     <a href="{% url 'app:ticket' ticket.id %}">{{ ticket.tituloT}}
+                     </a>
+                </li>
 
 
-    {% endfor %}
-    </ul>
+            {% endfor %}
+            </ul>
+    </div>
 
 {% else %}
     <p>No tickets are available.</p>
 {% endif %}
+
+<div>
+   <a href="{% url 'app:formularioT'%}">Añadir Ticket </a>
+</div>

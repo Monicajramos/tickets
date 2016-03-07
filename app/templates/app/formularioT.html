@@ -1,0 +1,100 @@
+<h1>Añadir Ticket </h1>
+
+{% if error_message %}
+    <p>
+        <strong>{{ error_message }}</strong>
+    </p>
+{% endif %}
+
+<form method="post">  <!--aniadirT tiene def en views.py-->
+    {% csrf_token %} <!--Para evitar falsificación de petición en sitios cruzados)-->
+
+    <p>
+        <label>Categoria</label>{{ form.categoriaT }} <br/>
+        <label>Titulo</label>{{ form.tituloT }}  <br/>
+        <label>Descripcion</label>{{ form.descripcionT }} <br/>
+
+       <!-- <label>Autor</label>{{ form.autorT }} EL AUTOR ES EL USUARIO CONECTADO-->
+        <!--<label>Responsable</label>{{ form.responsableT }} NO PODEMOS ELEGIR RESPONSABLE-->
+    </p>
+
+    <!--PARA DECIRLE AL FORMULARIO QUE EL AUTOR ES EL USUARIO "LOGGEADO" , HIDDEN PARA Q ESTÉ OCULTO-->
+    <input type="hidden" name="{{ form.autorT.html_name }}" value="{{ request.user.id }}"/>
+
+    <input type="submit" value="Add" /> <!--value solo es el nombre del boton-->
+</form>
+
+{% for e in form.non_field_errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.categoriaT.errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.tituloT.errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.descripcionT.errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.autorT.errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.responsableT.errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--info del usuario "loggeado"
+    {{ request.user }}
+    {{ request.user.username }}
+    {{ request.user.id }}-->
+
+    <!--ESTO CREA EL FORMULARIO AUTOMATICAMENTE{{ form.as_p }}-->
+
+
+    <!--Nombres hmtl
+        {{ form.categoriaT.html_name }}
+        {{ form.tituloT.html_name }}
+        {{ form.descripcionT.html_name }}
+        {{ form.fechaT.html_name }}
+        {{ form.autorT.html_name }}
+        {{ form.responsableT.html_name }}
+    -->
+    <!--id's del label
+        {{ form.categoriaT.id_for_label }}
+        {{ form.tituloT.id_for_label }}
+        {{ form.descripcionT.id_for_label }}
+        {{ form.fechaT.id_for_label }}
+        {{ form.autorT.id_for_label }}
+        {{ form.responsableT.id_for_label }}
+    -->
+
+    <!--valores
+        {{ form.categoriaT.value }}
+        {{ form.tituloT.value }}
+        {{ form.descripcionT.value }}
+        {{ form.fechaT.value }}
+        {{ form.autorT.value }}
+        {{ form.responsableT.value }}
+    -->
