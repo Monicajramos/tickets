@@ -1,8 +1,9 @@
+from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.shortcuts import render, redirect
 from .models import Comentario, Ticket, Categoria
 from django.utils import timezone
-from .forms import Formulario1,Formulario2
+from .forms import Formulario1,Formulario2,Formulario3
 
 
 class IndexView(generic.ListView):
@@ -41,12 +42,31 @@ def addTicket(request):
         form = Formulario1()
     return render(request, 'app/formularioT.html', {'form': form})
 
-def addComment(request,pk):
+def addComment(request, pk):
+    ticket= get_object_or_404(Ticket, id=pk)
     if request.method == "POST":
         form = Formulario2(request.POST)
+        #print(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('app:index')
+            return redirect('app:ticket',pk=ticket.id)
     else:
         form = Formulario2()
-    return render(request, 'app/formularioC.html', {'form': form})
+    return render(request, 'app/formularioC.html',
+                  {
+                      'ticket': ticket,
+                      'form': form
+                  })
+
+def filter(request):
+    if request.method == "POST":
+        form = Formulario3(request.POST)
+        if form.is_valid():
+            categoria=form.save(commit=False)
+            return redirect('app:filtro',categ=categoria)
+    else:
+        form = Formulario3()
+    return render(request, 'app/index.html',
+                  {
+                      'form': form
+                  })

@@ -1,3 +1,4 @@
+
 <h1>{{ ticket.tituloT }}</h1>
 
 {% if error_message %}
@@ -28,7 +29,7 @@
 
 
     <div>
-
+        <h4>Añadir comentario</h4>
         <form method="post">  <!--aniadirT tiene def en views.py-->
             {% csrf_token %} <!--Para evitar falsificación de petición en sitios cruzados)-->
 
@@ -37,15 +38,25 @@
             </p>
 
             <!--PARA DECIRLE AL FORMULARIO QUE EL AUTOR ES EL USUARIO "LOGGEADO" , HIDDEN PARA Q ESTÉ OCULTO-->
-            <input type="hidden" name="{{ form.ticket.html_name }}" value="{{ request.ticket.id  }}" />
-            <input type="hidden" name="{{ form.autorT.html_name }}" value="{{ request.user.id }}"/>
-
+            <input type="hidden" name="{{ form.autorC.html_name }}" value="{{ request.user.id }}"/>
+            <input type="hidden" name="{{ form.ticket.html_name}}" value="{{ ticket.id}}"/>
             <input type="submit" value="Add" /> <!--value solo es el nombre del boton-->
+
         </form>
 
      </div>
-
+    <a href="{% url 'app:index' %}">Volver al inicio </a>
 
 
 
 {% endif%}
+
+{% for e in form.non_field_errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.descripcionC.errors %}
+    <p>{{ e }}</p>
+{% endfor %}
+{% for e in form.ticket.errors %}
+    <p>{{ e }}</p>
+{% endfor %}

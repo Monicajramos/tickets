@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ticket,Comentario
+from .models import Ticket,Comentario,Categoria
 
 
 class Formulario1(forms.ModelForm):
@@ -14,4 +14,10 @@ class Formulario2(forms.ModelForm):
 
     class Meta:
         model= Comentario
-        exclude=["fechaT"]
+        exclude=["fechaC"]
+
+
+class Formulario3(forms.ModelForm):
+    class Meta:
+        model= Categoria
+        exclude=[]

@@ -24,10 +24,10 @@
                  <p> <strong>{{ comentario.autorC }} :</strong> {{ comentario.descripcionC }} </p>
             </li>
           {% endfor %}
-        <li>
-             <a href="{% url 'app:formularioC' ticket.id %}">Add Comentario </a>
-        </li>
 
-    </div>
+           <a href="{% url 'app:formularioC' ticket.id%}">Add Comentario</a>
+     </div>
+
+    <a href="{% url 'app:index' %}">Volver al inicio </a>
 
 {% endif%}

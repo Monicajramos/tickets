@@ -1,20 +1,46 @@
 
+<h1>TICKETS APP</h1>
+
+{% if error_message %}
+    <p>
+        <strong>{{ error_message }}</strong>
+    </p>
+{% endif %}
 
 {% if latest_ticket_list %}
+     <div>
 
+            <form method="post">  <!--aniadirT tiene def en views.py-->
+                {% csrf_token %} <!--Para evitar falsificación de petición en sitios cruzados)-->
+
+                <p>
+                    <label>Categoria</label>{{ form.categoria}}
+                    <input type="submit" value="Filtrar" /> <!--value solo es el nombre del boton-->
+                </p>
+            </form>
+
+     </div>
 
     <div>
-            <ul>
-            {% for ticket in latest_ticket_list %}
+        <table>
+            <tr>
+                  <td><strong>Ticket</strong></td>
+                  <td><strong>Category</strong></td>
+                  <td><strong>Date</strong></td>
+                  <td><strong>Author</strong></td>
+            </tr>
 
-                <li>
-                     <a href="{% url 'app:ticket' ticket.id %}">{{ ticket.tituloT}}
-                     </a>
-                </li>
-
+             {% for ticket in latest_ticket_list %}
+                 <tr>
+                     <td>{{ ticket.tituloT}}</td>
+                     <td>{{ ticket.categoriaT}}</td>
+                     <td>{{ ticket.fechaT.day}}/{{ ticket.fechaT.month}}/{{ ticket.fechaT.year}}</td>
+                     <td>{{ ticket.autorT}}</td>
+                     <td><a href="{% url 'app:ticket' ticket.id %}">Ver</a></td>
+                </tr>
 
             {% endfor %}
-            </ul>
+        </table>
     </div>
 
 {% else %}

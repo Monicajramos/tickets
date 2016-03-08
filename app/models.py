@@ -35,7 +35,8 @@ class Comentario(models.Model):
     ticket = models.ForeignKey(Ticket)  # relacion 1Comentario-1Ticket
     descripcionC = models.CharField(max_length=350)
     fechaC = models.DateTimeField('fechaC', default=timezone.now())
-    autorC = models.ForeignKey(User)
+    autorC = models.ForeignKey(User,related_name='autorC')
 
     def __str__(self):
         return self.descripcionC
+
